@@ -52,3 +52,10 @@ function renderPalette(palette) {
         paletteContainer.appendChild(card);
     });
 }
+
+generateBtn.addEventListener("click", () => {
+    const size = parseInt(paletteSizeSelect.value, 10);
+    const palette = generatePalette(size);
+    renderPalette(palette);
+});
+
