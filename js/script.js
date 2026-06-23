@@ -3,73 +3,73 @@ const paletteSizeSelect = document.getElementById("paletteSize");
 const paletteContainer = document.getElementById("paletteContainer");
 
 function generateRandomColor() {
-    const h = Math.floor(Math.random() * 360);
-    const s = Math.floor(Math.random() * 50) + 50;
-    const l = Math.floor(Math.random() * 30) + 40;
-    return { h, s, l };
+    const r = Math.floor(Math.random() * 256);
+    const g = Math.floor(Math.random() * 256);
+    const b = Math.floor(Math.random() * 256);
+
+    return { r, g, b };
 }
 
-function hslToString(color) {
-    return `hsl(${color.h}, ${color.s}%, ${color.l}%)`;
-}
-
-function hslToHex(color) {
-    const div = document.createElement("div");
-    div.style.color = hslToString(color);
-    document.body.appendChild(div);
-    const rgb = getComputedStyle(div).color;
-    document.body.removeChild(div);
-
-    const valores = rgb.match(/\d+/g).map(Number);
-    return "#" + valores.slice(0, 3).map(n => n.toString(16).padStart(2, "0")).join("");
+function rgbToHex(color) {
+    const toHex = (n) => n.toString(16).padStart(2, "0");
+    return "#" + toHex(color.r) + toHex(color.g) + toHex(color.b);
 }
 
 function generatePalette(size) {
     const palette = [];
+
     for (let i = 0; i < size; i++) {
         palette.push(generateRandomColor());
     }
+
     return palette;
 }
 
 function createColorCard(color) {
+    const hex = rgbToHex(color);
+
     const card = document.createElement("div");
     card.className = "color-card";
-    card.style.backgroundColor = hslToString(color);
+    card.style.backgroundColor = hex;
 
     const code = document.createElement("span");
     code.className = "color-code";
-    code.textContent = hslToHex(color);
-
+    code.textContent = hex;
     card.appendChild(code);
+
+    card.addEventListener("click", () => {
+        navigator.clipboard.writeText(hex);
+        showToast(`${hex} copiado`);
+    });
+
     return card;
 }
 
 function renderPalette(palette) {
     paletteContainer.innerHTML = "";
-    palette.forEach(color => {
+
+    palette.forEach((color) => {
         const card = createColorCard(color);
         paletteContainer.appendChild(card);
     });
 }
 
-generateBtn.addEventListener("click", () => {
-    const size = parseInt(paletteSizeSelect.value, 10);
-    const palette = generatePalette(size);
-    renderPalette(palette);
-});
-
 function showToast(message) {
     const toast = document.createElement("div");
     toast.className = "toast";
     toast.textContent = message;
-    document.body.appendChild(toast);
-    setTimeout(() => toast.remove(), 2000);
- }
 
-  generateBtn.addEventListener("click", () => {
+    document.body.appendChild(toast);
+
+    setTimeout(() => {
+        toast.remove();
+    }, 2000);
+}
+
+generateBtn.addEventListener("click", () => {
     const size = parseInt(paletteSizeSelect.value, 10);
     const palette = generatePalette(size);
+
     renderPalette(palette);
     showToast("Paleta generada");
-  });
+});

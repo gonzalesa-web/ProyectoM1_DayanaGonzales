@@ -10,29 +10,32 @@
 
 <body>
 
-  <header>
-    <div class="header-content">
-      <h1>Colorfly Studio</h1>
-      <p>Menos tiempo, mejor color</p>
-    </div>
-  </header>
+<header>
+  <div class="header-content">
+    <img src="./assets/preview-removebg-preview.png" alt="Paleta de colores con pincel" class="logo-icon">
+    <h1>Colorfly Studio</h1>
+    <p>Menos tiempo, mejor color<br>Paletas para grandes ideas<br></p>
+  </div>
+</header>
 
   <main>
     <section class="controls">
-  <div class="size-selector">
-    <label for="paletteSize">Cantidad de colores:</label>
-    <select id="paletteSize" name="paletteSize">
-      <option value="6">6 colores</option>
-      <option value="8">8 colores</option>
-      <option value="9">9 colores</option>
-    </select>
-  </div>
-  <button id="generateBtn">Generar paleta</button>
-</section>
+      <div class="size-selector">
+        <label for="paletteSize">Cantidad de colores:</label>
+        <select id="paletteSize" name="paletteSize">
+          <option value="6">6 colores</option>
+          <option value="8">8 colores</option>
+          <option value="9">9 colores</option>
+        </select>
+      </div>
+      <button id="generateBtn">Generar paleta</button>
+    </section>
+
+    <section class="palette-grid" id="paletteContainer" aria-label="Paleta de colores generada" aria-live="polite"></section>
   </main>
 
   <footer>
-    <p>Hecho para crear mejor</p>
+    <p>Gracias por visitarnos</p>
   </footer>
 
   <script src="js/script.js"></script>
