@@ -23,3 +23,11 @@ function hslToHex(color) {
     const valores = rgb.match(/\d+/g).map(Number);
     return "#" + valores.slice(0, 3).map(n => n.toString(16).padStart(2, "0")).join("");
 }
+
+function generatePalette(size) {
+    const palette = [];
+    for (let i = 0; i < size; i++) {
+        palette.push(generateRandomColor());
+    }
+    return palette;
+}
