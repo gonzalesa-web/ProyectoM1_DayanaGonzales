@@ -31,3 +31,24 @@ function generatePalette(size) {
     }
     return palette;
 }
+
+function createColorCard(color) {
+    const card = document.createElement("div");
+    card.className = "color-card";
+    card.style.backgroundColor = hslToString(color);
+
+    const code = document.createElement("span");
+    code.className = "color-code";
+    code.textContent = hslToHex(color);
+
+    card.appendChild(code);
+    return card;
+}
+
+function renderPalette(palette) {
+    paletteContainer.innerHTML = "";
+    palette.forEach(color => {
+        const card = createColorCard(color);
+        paletteContainer.appendChild(card);
+    });
+}
