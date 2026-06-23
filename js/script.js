@@ -59,3 +59,17 @@ generateBtn.addEventListener("click", () => {
     renderPalette(palette);
 });
 
+function showToast(message) {
+    const toast = document.createElement("div");
+    toast.className = "toast";
+    toast.textContent = message;
+    document.body.appendChild(toast);
+    setTimeout(() => toast.remove(), 2000);
+ }
+
+  generateBtn.addEventListener("click", () => {
+    const size = parseInt(paletteSizeSelect.value, 10);
+    const palette = generatePalette(size);
+    renderPalette(palette);
+    showToast("Paleta generada");
+  });
