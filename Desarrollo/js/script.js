@@ -3,16 +3,32 @@ const paletteSizeSelect = document.getElementById("paletteSize");
 const paletteContainer = document.getElementById("paletteContainer");
 
 function generateRandomColor() {
-    const r = Math.floor(Math.random() * 256);
-    const g = Math.floor(Math.random() * 256);
-    const b = Math.floor(Math.random() * 256);
+    const h = Math.floor(Math.random() * 360);      // tono: 0-360
+    const s = Math.floor(Math.random() * 51) + 50;   // saturación: 50-100%
+    const l = Math.floor(Math.random() * 41) + 40;   // luminosidad: 40-80%
 
-    return { r, g, b };
+    return { h, s, l };
 }
 
-function rgbToHex(color) {
+function hslToString(color) {
+    return `hsl(${color.h}, ${color.s}%, ${color.l}%)`;
+}
+
+// Le pedimos al navegador que haga la conversión por nosotros:
+// pintamos un elemento invisible con el color HSL y leemos
+// cómo lo interpretó el navegador en formato RGB, luego lo pasamos a HEX.
+function hslToHex(color) {
+    const tempDiv = document.createElement("div");
+    tempDiv.style.color = hslToString(color);
+    document.body.appendChild(tempDiv);
+
+    const rgbString = getComputedStyle(tempDiv).color; // ej: "rgb(120, 45, 200)"
+    document.body.removeChild(tempDiv);
+
+    const [r, g, b] = rgbString.match(/\d+/g).map(Number);
+
     const toHex = (n) => n.toString(16).padStart(2, "0");
-    return "#" + toHex(color.r) + toHex(color.g) + toHex(color.b);
+    return "#" + toHex(r) + toHex(g) + toHex(b);
 }
 
 function generatePalette(size) {
@@ -26,11 +42,12 @@ function generatePalette(size) {
 }
 
 function createColorCard(color) {
-    const hex = rgbToHex(color);
+    const hslString = hslToString(color);
+    const hex = hslToHex(color);
 
     const card = document.createElement("div");
     card.className = "color-card";
-    card.style.backgroundColor = hex;
+    card.style.backgroundColor = hslString;
 
     const code = document.createElement("span");
     code.className = "color-code";
