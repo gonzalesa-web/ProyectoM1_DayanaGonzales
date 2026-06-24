@@ -54,14 +54,14 @@ La aplicación está desplegada con **GitHub Pages** y puede visitarse en:
 
 ```
 ProyectoM1_DayanaGonzales/
-├── Desarrollo/
+Desarrollo/
 │   ├── index.html
 │   ├── css/
 │   │   └── styles.css
 │   ├── js/
 │   │   └── script.js
 │   └── assets/
-└── Documentacion/
+Documentacion/
     ├── README.md
     └── uso-de-ia.md
 ```
