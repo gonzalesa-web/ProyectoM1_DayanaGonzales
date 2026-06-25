@@ -50,18 +50,22 @@ La aplicación está desplegada con **GitHub Pages** y puede visitarse en:
 - **Sin frameworks ni librerías externas:** el proyecto usa JavaScript, separando la lógica en funciones pequeñas con una responsabilidad cada una (generar color, convertir formato, crear tarjeta, renderizar paleta, mostrar feedback).
 - **Accesibilidad:** se usaron etiquetas semánticas (`header`, `main`, `footer`), labels asociados al selector, y estilos de foco visibles (`:focus-visible`) para navegación con teclado.
 
+## Posibles mejoras
+- Soporte de teclado en las tarjetas de color (tabindex + Enter/Espacio)
+- Extra credit: bloqueo de colores y guardado en localStorage
+- Agregar modo oscuro
+
 ## Estructura del proyecto
 
 ```
 ProyectoM1_DayanaGonzales/
-Desarrollo/
 │   ├── index.html
 │   ├── css/
 │   │   └── styles.css
 │   ├── js/
 │   │   └── script.js
 │   └── assets/
-Documentacion/
+Documentación
     ├── README.md
     └── uso-de-ia.md
 ```
